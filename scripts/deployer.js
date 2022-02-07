@@ -8,7 +8,9 @@ const main = async () => {
   
     //create token and factory to deploy our Waveportal contract and await deployment
     const Token = await hre.ethers.getContractFactory("WavePortal");
-    const portal = await Token.deploy();
+    const portal = await Token.deploy({
+        value:hre.ethers.utils.parseEther('0.001'),
+    });
     await portal.deployed();
   
     console.log("WavePortal address: ", portal.address);

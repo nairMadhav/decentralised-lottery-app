@@ -1,38 +1,51 @@
 const { Contract } = require("@ethersproject/contracts");
 
-const main=async()=>{
-    let waveCount;
-    //deploying the WavePortal contract
-    const WaveContractFactory=await hre.ethers.getContractFactory("WavePortal");
-    const waveContract=await WaveContractFactory.deploy();
+const main = async () => {
+    const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
+    const waveContract = await waveContractFactory.deploy({
+      value: hre.ethers.utils.parseEther("0.1"),
+    });
     await waveContract.deployed();
-    console.log("contract deployed to ", waveContract.address);
-
-    waveCount=await waveContract.getTotalWaves();
-    console.log("Number of waves",waveCount.toNumber());
-
-    let waveTxn=await waveContract.wave("sample message #1")
+    console.log("Contract addy:", waveContract.address);
+  
+    /*
+     * Get Contract balance
+     */
+    let contractBalance = await hre.ethers.provider.getBalance(
+      waveContract.address
+    );
+    console.log(
+      "Contract balance:",
+      hre.ethers.utils.formatEther(contractBalance)
+    );
+  
+    /*
+     * Send Wave
+     */
+    let waveTxn = await waveContract.wave("SAMPLE MESSAGE!");
     await waveTxn.wait();
-
-    const [_, randomPerson] = await hre.ethers.getSigners();
-    waveTxn=await waveContract.connect(randomPerson).wave("sample message #2");
-    await waveTxn.wait();
-    
-    let waves=await waveContract.getAll();
-    console.log(waves);
-    
-    waveCount=await waveContract.getTotalWaves();
-
-
-
-}
-const runMain=async()=>{
+  
+    /*
+     * Get Contract balance to see what happened!
+     */
+    contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
+    console.log(
+      "Contract balance:",
+      hre.ethers.utils.formatEther(contractBalance)
+    );
+  
+    let allWaves = await waveContract.getAll();
+    console.log(allWaves);
+  };
+  
+  const runMain = async () => {
     try {
-       await main();
-       process.exit(0); 
+      await main();
+      process.exit(0);
     } catch (error) {
-       console.log(error);
-       process.exit(1); 
+      console.log(error);
+      process.exit(1);
     }
-}
-runMain();
+  };
+  
+  runMain();
