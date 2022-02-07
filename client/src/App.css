@@ -1,0 +1,80 @@
+html,body{
+  margin:0px;
+  background-color:teal;
+}
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  height: 100%;
+  width: 100%;
+  background-color: teal;
+  text-align: center;
+  
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.header {
+  margin:0% 10%;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
+  display:flex;
+}
+
+.bio {
+  margin:5%;
+  display: flex;
+  text-align: center;
+  color: aliceblue;
+  margin-top: 6px;
+}
+
+.waveButton {
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  
+}
+.inputArea{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  justify-content: center;
+  align-items: left;
+}
+.inputArea input[type="text"]{
+  width:80%;
+  height:10%;
+  padding:14px;
+  border-radius:5px;
+  border:none;
+  margin-top:14px;
+  margin-left:10px;
+  margin-right:5px;
+
+}
+.messageBox{
+  border:1px solid black;
+  word-wrap: break-word;
+  display:flex;
+  flex-direction: column;
+  margin:5px 10px;
+  
+}
+.authDone{
+  display: flex;
+  flex-direction: column;
+
+}
