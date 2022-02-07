@@ -18,16 +18,12 @@ const main = async () => {
       "Contract balance:",
       hre.ethers.utils.formatEther(contractBalance)
     );
-  
-    /*
-     * Send Wave
-     */
+
+    //sample lottery entry
     let waveTxn = await waveContract.wave("SAMPLE MESSAGE!");
     await waveTxn.wait();
   
-    /*
-     * Get Contract balance to see what happened!
-     */
+    //contract balance
     contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
     console.log(
       "Contract balance:",
