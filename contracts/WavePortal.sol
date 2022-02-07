@@ -19,6 +19,12 @@ contract WavePortal{
     //this is where the messages will be stored
     Wave[] waves;
 
+    /*
+    mappings
+    */
+    mapping(address=>uint) lastWaved;
+
+
     
     constructor() payable{
         console.log("What up world, its ya boy SmartContract.");
@@ -26,9 +32,18 @@ contract WavePortal{
         seed=(block.timestamp+block.difficulty)%100;
     }
     function wave(string memory _message) public{
+        require(
+            lastWaved[msg.sender] + 15 minutes < block.timestamp,
+            "Wait 15 minutes to make your next request"
+        );
+
+        /*
+         * Update the current timestamp we have for the user
+         */
+        lastWaved[msg.sender] = block.timestamp;
         totalWaves+=1;
         console.log("%s has sent the message:'%s'",msg.sender,_message);
-        
+
         //storing the individual message in the global waves struct
         waves.push(Wave(msg.sender, block.timestamp,_message));
 

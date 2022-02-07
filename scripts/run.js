@@ -7,10 +7,8 @@ const main = async () => {
     });
     await waveContract.deployed();
     console.log("Contract addy:", waveContract.address);
-  
-    /*
-     * Get Contract balance
-     */
+    
+    //contract balance
     let contractBalance = await hre.ethers.provider.getBalance(
       waveContract.address
     );
@@ -21,9 +19,8 @@ const main = async () => {
 
     //sample lottery entry
     let waveTxn = await waveContract.wave("SAMPLE MESSAGE!");
-    await waveTxn.wait();
+    await waveTxn.wait(); 
   
-    //contract balance
     contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
     console.log(
       "Contract balance:",
